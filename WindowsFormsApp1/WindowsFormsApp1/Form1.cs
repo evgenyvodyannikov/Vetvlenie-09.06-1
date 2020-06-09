@@ -54,7 +54,7 @@ namespace WindowsFormsApp1
                     { label4.Text = "Треугольник остроугольный"; label4.ForeColor = Color.Orange; }
                 }
                 else
-                { label4.Text = "Теугольника не существует"; label4.ForeColor = Color.Red; }
+                { label4.Text = "Треугольника не существует"; label4.ForeColor = Color.Red; }
                 a1 *= 3;
                 a2 *= 3;
                 b1 *= 3;
@@ -67,6 +67,10 @@ namespace WindowsFormsApp1
                 g.DrawLine(Pens.Blue, (float)a1, (float)a2, (float)b1, (float)b2);
                 g.DrawLine(Pens.Blue, (float)b1, (float)b2, (float)c1, (float)c2);
                 g.DrawLine(Pens.Blue, (float)a1, (float)a2, (float)c1, (float)c2);
+                Font drawFont = new Font("Calibri", 14);
+                g.DrawString("A", drawFont, Brushes.Red, (float)a1 - 20, (float)a2 - 20);
+                g.DrawString("B", drawFont, Brushes.Red, (float)b1 - 20, (float)b2 - 20);
+                g.DrawString("C", drawFont, Brushes.Red, (float)c1, (float)c2 - 20);
                 pictureBox1.Image = bt;
                 pictureBox1.Invalidate();
             }
