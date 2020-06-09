@@ -17,7 +17,6 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
         public Bitmap bt;
-        Pen pen = new Pen(Color.Red);
         Graphics g;
         private void button1_Click(object sender, EventArgs e)
         {
@@ -77,9 +76,10 @@ namespace WindowsFormsApp1
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox tb = (TextBox)sender;
             if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
             {
-                if (textBox3.Text.Length == 6 && textBox3.Text.Length <= 6)
+                if (tb.Text.Length == 2 && tb.Text.Length <= 2)
                 {
                     e.Handled = true;
                 }
