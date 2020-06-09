@@ -26,16 +26,16 @@ namespace WindowsFormsApp1
             double a1 = double.Parse(textBox1.Text);
             double a2 = double.Parse(textBox2.Text);
 
-           
+
             double b1 = double.Parse(textBox3.Text);
             double b2 = double.Parse(textBox4.Text);
 
             double c1 = double.Parse(textBox5.Text);
             double c2 = double.Parse(textBox6.Text);
 
-            double a = Math.Sqrt(Math.Pow(a2 - a1, 2) + Math.Pow(b1 - b2, 2));
-            double b = Math.Sqrt(Math.Pow(b2 - b1, 2) + Math.Pow(c1 - c2, 2));
-            double c = Math.Sqrt(Math.Pow(c2 - c1, 2) + Math.Pow(a1 - a2, 2));
+            double a = Math.Sqrt(Math.Pow(a1 - b1, 2) + Math.Pow(b2 - a2, 2));
+            double b = Math.Sqrt(Math.Pow(b1 - c1, 2) + Math.Pow(c2 - b2, 2));
+            double c = Math.Sqrt(Math.Pow(c2 - a2, 2) + Math.Pow(a1 - c1, 2));
 
             double alpha = 0;
             double betta = 0;
@@ -46,28 +46,53 @@ namespace WindowsFormsApp1
             gamma = (((Math.Acos((a * a + b * b - c * c) / (2 * a * b)) * 180)) / Math.PI);
             if ((a < b + c) & (b < c + a) & (c < b + a))
             {
-                if ((alpha == 90) || (betta == 90) || (gamma == 90)) MessageBox.Show(" Треугольник прямоугольный");
+                if ((alpha == 90) || (betta == 90) || (gamma == 90)) { label4.Text = "Треугольник прямоугольный"; label4.ForeColor = Color.BlueViolet; }
                 else
-                    if ((alpha > 90) || (betta > 90) || (gamma > 90)) MessageBox.Show("Треугольник тупоугольный");
+                    if ((alpha > 90) || (betta > 90) || (gamma > 90)) { label4.Text = "Треугольник тупоугольный"; label4.ForeColor = Color.LimeGreen; }
                 else
-                    MessageBox.Show("Треугольник остроугольный");
+                { label4.Text = "Треугольник остроугольный"; label4.ForeColor = Color.Orange; }
             }
             else
-                MessageBox.Show("Теугольник не существует");
-            a1 *= 2;
-            a1 *= 2;
-            b1 *= 2;
-            b1 *= 2;
-            c1 *= 2;
-            c1 *= 2;
-            g.FillEllipse(Brushes.Red, (float)a1, (float)a2, 2, 2);
-            g.FillEllipse(Brushes.Red, (float)b1, (float)b2, 2, 2);
-            g.FillEllipse(Brushes.Red, (float)c1, (float)c2, 2, 2);
+            { label4.Text = "Теугольника не существует"; label4.ForeColor = Color.Red; }
+            a1 *= 3;
+            a2 *= 3;
+            b1 *= 3;
+            b2 *= 3;
+            c1 *= 3;
+            c2 *= 3;
+            g.FillEllipse(Brushes.Red, (float)a1, (float)a2, 3, 3);
+            g.FillEllipse(Brushes.Red, (float)b1, (float)b2, 3, 3);
+            g.FillEllipse(Brushes.Red, (float)c1, (float)c2, 3, 3);
             g.DrawLine(Pens.Blue, (float)a1, (float)a2, (float)b1, (float)b2);
             g.DrawLine(Pens.Blue, (float)b1, (float)b2, (float)c1, (float)c2);
             g.DrawLine(Pens.Blue, (float)a1, (float)a2, (float)c1, (float)c2);
             pictureBox1.Image = bt;
             pictureBox1.Invalidate();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Треугольник задан координатами своих вершин на плоскости: А(х1,у1), В(х2,у2), С(х3,у3).\nОпределить, является он прямо-, остро- или тупоугольным.\nЗамечание: Не следует отбрасывать экстремальные случаи, когда вершины треугольника совпадают или лежат на одной прямой. Например, треугольник с нулевой стороной обладает свойством прямоугольного и имеет два прямых угла!\nОднако в задании, как мне кажется, допущена ошибка, т.к. не существует треугольника с 2! прямыми углами. Треугольник с нулевой стороной уже не труегольник", "Задание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
+            {
+                if (textBox3.Text.Length == 6 && textBox3.Text.Length <= 6)
+                {
+                    e.Handled = true;
+                }
+                return;
+            }
+            if (Char.IsControl(e.KeyChar))
+            {
+                if (e.KeyChar == (char)Keys.Back)
+                {
+                    return;
+                }
+            }
+            e.Handled = true;
         }
     }
 }
