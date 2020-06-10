@@ -42,14 +42,17 @@ namespace WindowsFormsApp1
                 double betta = 0;
                 double gamma = 0;
 
-                alpha = (((Math.Acos((b * b + c * c - a * a) / (2 * b * c)) * 180)) / Math.PI);
-                betta = (((Math.Acos((a * a + c * c - b * b) / (2 * a * c)) * 180)) / Math.PI);
-                gamma = (((Math.Acos((a * a + b * b - c * c) / (2 * a * b)) * 180)) / Math.PI);
+                alpha = Math.Floor(Math.Acos((b * b + c * c - a * a) / (2 * b * c)) * 180 / Math.PI);
+                betta = Math.Floor(Math.Acos((a * a + c * c - b * b) / (2 * a * c)) * 180 / Math.PI);
+                gamma = Math.Floor(Math.Acos((a * a + b * b - c * c) / (2 * a * b)) * 180/ Math.PI);
+
+                //alpha = Math.Cos(a * a + c * c - b * b) / 2 * a * c;
+                //betta = Math.Cos(a * a + b * b - c * c) / 2 * a * b;
+                //gamma = Math.Cos(a * a + b * b - c * c) / 2 * c * b;
                 if ((a < b + c) & (b < c + a) & (c < b + a))
                 {
                     if ((alpha == 90) || (betta == 90) || (gamma == 90)) { label4.Text = "Треугольник прямоугольный"; label4.ForeColor = Color.BlueViolet; }
-                    else
-                        if ((alpha > 90) || (betta > 90) || (gamma > 90)) { label4.Text = "Треугольник тупоугольный"; label4.ForeColor = Color.LimeGreen; }
+                    else if ((alpha > 90) || (betta > 90) || (gamma > 90)) { label4.Text = "Треугольник тупоугольный"; label4.ForeColor = Color.LimeGreen; }
                     else
                     { label4.Text = "Треугольник остроугольный"; label4.ForeColor = Color.Orange; }
                 }
